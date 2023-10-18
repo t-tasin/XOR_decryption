@@ -2,6 +2,7 @@
 #include <string>
 #include <bitset>
 #include <fstream>
+#include <algorithm>
 using namespace std;
 
 class F2BConverter {
@@ -20,7 +21,8 @@ class F2BConverter {
   int checkForTXT(string filepath){
     int len = filepath.length();
     string txtCheck = filepath.substr(len-4);
-    if (txtCheck == ".txt"){
+    transform(txtCheck.begin(), txtCheck.end(), txtCheck.begin(), ::toupper); 
+    if (txtCheck == ".TXT"){
       this->isTXT = true;
     } else {
       this->isTXT=false;
@@ -29,10 +31,13 @@ class F2BConverter {
   }
 
   string convertFull(){
-    filepath = this->filepath;
-    string fileString = fileToString();
-    string bitString = strToBin(fileString);
-    return bitString;
+    if (this->isTXT){
+      string fileString = fileToString();
+      string bitString = strToBin(fileString);
+      return bitString;
+    }
+    cout << "Given file was not a .txt file";
+    return "null";
   }
 
   string strToBin(string toConvert){
@@ -69,7 +74,6 @@ class F2BConverter {
         }
       }
       if (charCheck==false){
-        cout << "here: " << c << ' ' << bitset<8>(c).to_string() << "\n";
         this->is09 = false;
         break;
       }else{

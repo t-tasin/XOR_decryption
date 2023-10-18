@@ -58,6 +58,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "cmake.configureOnOpen": false,
   "files.associations": {
-    "bitset": "cpp"
+    "bitset": "cpp",
+    "xstring": "cpp"
   }
 }
