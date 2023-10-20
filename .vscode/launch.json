@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/tempo/Desktop/codeJail/SoftDev/XOR_decryption/Scratch",
-      "program": "c:/Users/tempo/Desktop/codeJail/SoftDev/XOR_decryption/Scratch/build/Debug/outDebug",
+      "cwd": "c:/Users/tempo/Desktop/codeJail/SoftDev/XOR_decryption",
+      "program": "c:/Users/tempo/Desktop/codeJail/SoftDev/XOR_decryption/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
