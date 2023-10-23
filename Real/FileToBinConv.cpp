@@ -3,6 +3,7 @@
 #include <bitset>
 #include <fstream>
 #include <algorithm>
+#include <valarray>
 using namespace std;
 
 class F2BConverter {
@@ -10,6 +11,7 @@ class F2BConverter {
     string filepath;
     bool isTXT;
     bool is09;
+    bool lessThan50;
     char charList[11] = {'1','2','3','4','5','6','7','8','9','0',','};
 
     F2BConverter::F2BConverter(string file_path){
@@ -63,12 +65,19 @@ class F2BConverter {
     string fileString;
     fstream file;
     file.open("testFile.txt");
+    int numCount = 0;
     while(file){
       char c = file.get();
       bool charCheck = false;
       for (int i=0; i<11; i++){
         if (c==this->charList[i] || bitset<8>(c).to_string()=="11111111"){ // get reads in ' 'with bit pattern 11111111
-          //this is ignored elsewhere so it just passes here
+          char ints[10] = {'1','2','3','4','5','6','7','8','9','0'};
+          for (int j=0;j<10;j++){
+            if (c==ints[j]){
+              numCount += 1;
+              break;
+            }
+          }
           charCheck = true;
           break;
         }
@@ -82,6 +91,10 @@ class F2BConverter {
     }
     this->is09 = true;
     file.close();
+    cout << "file contains " << numCount << " numbers\n";
+    if (numCount<50){
+      this->lessThan50 = true;
+    } else {this->lessThan50 = false;}
     return fileString;
   }
   bool beget(){
@@ -93,6 +106,5 @@ int main(){
   F2BConverter conv("testFile.txt");
   string c = conv.convertFull();
   cout << c << "\n";
-  cout << conv.beget();
   return 0;
 }
