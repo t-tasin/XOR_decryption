@@ -12,12 +12,13 @@ class K2BConverter{
 
     K2BConverter::K2BConverter(int i){
         Combinations();
+        //cout<<"Finished Creation\n";
         Convert();
-        cout << "here";
+        //cout << "Finished Conversion";
         //MEGA();
     }
     
-    void Combinations(){
+    int Combinations(){
         string arr [] = {"a","b","c","d","e","f","g",
                         "h","i","j","k","l","m","n",
                         "o","p","q","r","s","t","u",
@@ -25,7 +26,6 @@ class K2BConverter{
 
         //I forgot how to dynamically increase the size of an array in c++ so I used the count variable to find out
         // how many combinations there were and then used that to declare and initialize the keyCombinations array.
-        string keysCombinations [17575];
         int count = 0;
         //for loop for the first letter in combinations
         for (int i = 0; i <= 25; i++){
@@ -34,17 +34,15 @@ class K2BConverter{
                 //for loop for the third letter in combinations
                 //This is where the combinations are appended to the keyCombinations array
                 for (int h = 0; h <= 25; h++){
-                    keysCombinations [count] = arr[i] + arr[j] + arr[h];
+                    this->keysList[count] = arr[i] + arr[j] + arr[h];
                     count ++;
                 }
             }
         }
-        for (int j = 0; j<17576; j++){
-            this->keysList[j] = keysCombinations[j];
-        }
+        return 0;
     }
 
-    void Convert(){
+    int Convert(){
         for (int i=0; i<17576; i++){
             string key = this->keysList[i];
             string binKey;
@@ -53,11 +51,13 @@ class K2BConverter{
                 }
             this->binKeysList[i]=binKey;
         }
+        return 0;
     }
-    void MEGA(){
+    int MEGA(){
         for (int x=0;x<17576;x++){
             cout << keysList[x] << " " << binKeysList[x] << "\n";
         }
+        return 0;
     }
 };
 

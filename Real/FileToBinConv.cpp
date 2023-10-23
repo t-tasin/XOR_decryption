@@ -3,7 +3,6 @@
 #include <bitset>
 #include <fstream>
 #include <algorithm>
-#include <valarray>
 using namespace std;
 
 class F2BConverter {

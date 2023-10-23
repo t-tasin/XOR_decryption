@@ -59,6 +59,10 @@
   "cmake.configureOnOpen": false,
   "files.associations": {
     "bitset": "cpp",
-    "xstring": "cpp"
+    "xstring": "cpp",
+    "algorithm": "cpp",
+    "iterator": "cpp",
+    "xmemory": "cpp",
+    "xutility": "cpp"
   }
 }
