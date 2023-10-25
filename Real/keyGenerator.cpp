@@ -5,6 +5,7 @@ using namespace std;
 
 void combinations();
 
+
 int main() {
     //testing combinations function
     combinations();

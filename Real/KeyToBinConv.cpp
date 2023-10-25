@@ -10,14 +10,14 @@ class K2BConverter{
     string keysList[17576];
     string binKeysList[17576];
 
-    K2BConverter::K2BConverter(int i){
+    K2BConverter::K2BConverter(){
         combinations();
         //cout<<"Finished Creation\n";
         convert();
         //cout << "Finished Conversion";
-        //MEGA();
+        MEGA();
     }
-    
+
     int combinations(){
         string arr [] = {"a","b","c","d","e","f","g",
                         "h","i","j","k","l","m","n",
@@ -62,6 +62,6 @@ class K2BConverter{
 };
 
 int main(){
-    K2BConverter c(3);
+    K2BConverter c;
     return 0;
 }

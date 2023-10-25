@@ -13,11 +13,14 @@ class F2BConverter {
     bool lessThan50;
     char charList[11] = {'1','2','3','4','5','6','7','8','9','0',','};
 
-    F2BConverter::F2BConverter(string file_path){
-      checkForTXT(file_path);
-      this->is09 = false;
-      this->filepath = file_path;
-    }
+    // no constructor for this class. Instead initialize an instance, use setup(), and then convertFull()
+
+  int setup(string file_path){
+    checkForTXT(file_path);
+    this->is09 = false;
+    this->filepath = file_path;
+    return 0;
+  }
 
   int checkForTXT(string filepath){
     int len = filepath.length();
@@ -102,7 +105,8 @@ class F2BConverter {
 };
 
 int main(){
-  F2BConverter conv("testFile.txt");
+  F2BConverter conv;
+  conv.setup("testFile.txt");
   string c = conv.convertFull();
   cout << c << "\n";
   return 0;

@@ -6,6 +6,7 @@
 using namespace std;
 
 
+
 void decryptionTool (string message, string key){
     //get length of binary message and key, and creates variables to hold those value
     int messageLen = message.length();
