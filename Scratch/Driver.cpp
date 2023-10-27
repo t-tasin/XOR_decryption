@@ -20,5 +20,8 @@ class Driver{
 
     Driver::Driver(string filePath){
         this->Filepath = filePath;
+        F2BConv.setup(filePath);
+        string binString = F2BConv.convertFull();
+        cout << binString;
     }
 };

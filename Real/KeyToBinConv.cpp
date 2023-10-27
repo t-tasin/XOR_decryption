@@ -15,7 +15,6 @@ class K2BConverter{
         //cout<<"Finished Creation\n";
         convert();
         //cout << "Finished Conversion";
-        MEGA();
     }
 
     int combinations(){
@@ -53,6 +52,11 @@ class K2BConverter{
         }
         return 0;
     }
+
+    string get(int key_index){
+        return this->binKeysList[key_index];
+    }
+
     int MEGA(){
         for (int x=0;x<17576;x++){
             cout << keysList[x] << " " << binKeysList[x] << "\n";
@@ -60,8 +64,9 @@ class K2BConverter{
         return 0;
     }
 };
-
+/*
 int main(){
     K2BConverter c;
     return 0;
 }
+*/
