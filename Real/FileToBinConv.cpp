@@ -82,7 +82,7 @@ class F2BConverter {
       bool charCheck = false;
       for (int i=0; i<12; i++){
         if (c==this->charList[i] || bitset<8>(c).to_string()=="11111111"){ // get reads in ' 'with bit pattern 11111111
-          char ints[11] = {'1','2','3','4','5','6','7','8','9','0',};
+          char ints[11] = {'1','2','3','4','5','6','7','8','9','0'};
           for (int j=0;j<10;j++){
             if (c==ints[j]){
               numCount += 1;
