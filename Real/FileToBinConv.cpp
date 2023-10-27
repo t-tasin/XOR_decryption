@@ -114,7 +114,6 @@ class F2BConverter {
   }
 };
 
-/*
 int main(){
   F2BConverter conv;
   conv.setup("testFile.txt");
@@ -122,5 +121,4 @@ int main(){
   cout << c << "\n";
   return 0;
 }
-*/
 
