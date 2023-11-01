@@ -49,26 +49,24 @@ class F2BConverter {
     string sumChars;
     for (int i = 0; i < toConvert.length(); i++) { 
       if (toConvert[i]==','){ // keeps the commas not converted to binary
-        if ((stoi(sumChars)>255) || (stoi(sumChars)<0)){
+        int num = stoi(sumChars);
+        if ((num>255) || (num<0)){
           this->withinLimit = false;
           cout << "number out of range: " << sumChars << "\n";
         }
         sumChars = "";
-        bitString += toConvert[i];
+        bitString += bitset<8>(num).to_string() + ",";
       } else {
         sumChars += toConvert[i];
-        string tString = bitset<8>(toConvert[i]).to_string();
-        if (tString == "11111111"){ // the ' ' is excluded here
-          if ((stoi(sumChars)>255) || (stoi(sumChars)<0)){
-            this->withinLimit = false;
-            cout << "number out of range: " << sumChars << "\n";
-          }
-        }
-        else {
-          bitString += tString;
-        }
       }
     }
+    int num = stoi(sumChars);
+      if ((num>255) || (num<0)){
+        this->withinLimit = false;
+        cout << "number out of range: " << sumChars << "\n";
+      }
+    sumChars = "";
+    bitString += bitset<8>(num).to_string();
     return bitString;
   }
 
@@ -114,6 +112,8 @@ class F2BConverter {
   }
 };
 
+
+/*
 int main(){
   F2BConverter conv;
   conv.setup("testFile.txt");
@@ -121,4 +121,4 @@ int main(){
   cout << c << "\n";
   return 0;
 }
-
+*/
