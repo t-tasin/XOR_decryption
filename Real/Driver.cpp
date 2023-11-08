@@ -1,7 +1,7 @@
 #include <iostream>
-#include <string>
 #include <sstream>
 #include <bitset>
+#include <string>
 
 #include ".\BinToASCIIConv.cpp"
 #include ".\decryptionTool.cpp"
@@ -13,35 +13,40 @@
 using namespace std;
 
 class Driver{
+    private:
+    string binString;
+
     public:
     string Filepath;  
     F2BConverter F2BConv;
     K2BConverter K2BConv; //call the get(id) method to get a given key
     B2AConverter B2AConv;
     Decrypter Decrypt;
-    string decryptedStrings[17576];
+    
+    string why[2000];
 
-
-    Driver::Driver(string filePath){
-        this->Filepath = filePath;
-        F2BConv.setup(filePath);
+    void setFile(string Filepath){
+        this->Filepath = Filepath;
+        this->F2BConv.setup(Filepath);
+        this->binString = F2BConv.convertFull();
     }
 
-    int keyConvert(){
-        string binString = F2BConv.convertFull();
+    string keyConvert(int keyID){
+        if (keyID < 0 || keyID > 17575){
+            cout << "keyIndex out of range\nKey IDs range from 0 to 17575\n";
+            return "void";
+        }
         string xored;
         string asciid;
         string decrypted;
-        for (int i=0;i<17576;i++){
-            xored = Decrypt.decrypt(binString,K2BConv.get(i));
-            //cout << xored << "\n";
-            asciid = binToInt(xored);
-            //cout << asciid << "\n";
-            //decrypted = B2AConv.setup(xored);
-            //cout << decrypted << "\n";
-            this->decryptedStrings[i] = asciid;
-        }
-        return 0;
+        string key = K2BConv.get(keyID);
+        cout << "Key: " << K2BConv.get(keyID,false) << "\n";
+        xored = Decrypt.decrypt(this->binString,key);
+        asciid = binToInt(xored);
+        cout << "Ascii Codes: " << asciid << "\n";
+        decrypted = B2AConv.setup(xored);
+        cout << "Decrypted: " << decrypted << "\n";
+        return asciid;
     }
 
     string binToInt(string xor){
@@ -57,16 +62,10 @@ class Driver{
         set = "";
         return nums;
     }
-
-    string getDecoded(int id){
-        return this->decryptedStrings[id];
-    }
 };
 
 int main(){
-    cout << "here1\n";
-    Driver d("testFile.txt");
-    d.keyConvert();
-    cout << "here\n";
-    d.getDecoded(17574);
+    Driver d;
+    d.setFile("testFile.txt");
+    for(int i=0;i<17576;i++){d.keyConvert(i);}
 }

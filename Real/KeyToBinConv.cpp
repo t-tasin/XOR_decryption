@@ -53,8 +53,10 @@ class K2BConverter{
         return 0;
     }
 
-    string get(int key_index){
-        return this->binKeysList[key_index];
+    string get(int key_index, bool binary = true){
+        if (binary){
+            return this->binKeysList[key_index];
+        } else {return this->keysList[key_index];}
     }
 
     int MEGA(){
