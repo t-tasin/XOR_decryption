@@ -46,7 +46,7 @@ int wordCompare (string decryptedMessage){
     ifstream file;
     string fileContents;
 
-    file.open("../commonWords.txt");
+    file.open("./commonWords.txt");
     file >> fileContents;
 
     if (file.is_open()){
