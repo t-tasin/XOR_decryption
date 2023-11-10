@@ -3,18 +3,19 @@
 #include <bitset>
 #include <string>
 
-#include ".\BinToASCIIConv.cpp"
-#include ".\decryptionTool.cpp"
-#include ".\FileToBinConv.cpp"
-#include ".\KeyToBinConv.cpp"
+#include ".\BinToASCIIConv.cpp" //
+#include ".\FileToBinConv.cpp" //
+#include ".\KeyToBinConv.cpp" //
 
-#include ".\Decrypter.cpp"
+#include ".\Decrypter.cpp" //
+#include ".\commonWordCompare.cpp" //
 
 using namespace std;
 
 class Driver{
     private:
     string binString;
+    bool setup = false;
 
     public:
     string Filepath;  
@@ -22,19 +23,42 @@ class Driver{
     K2BConverter K2BConv; //call the get(id) method to get a given key
     B2AConverter B2AConv;
     Decrypter Decrypt;
-    
-    string why[2000];
 
+    int highKeyID = 0;
+    int highKeyPercent = 0;
+
+    void run(){
+        cout << "running\n";
+        if (!this->setup){
+            cout << "Please set file before running\n";
+        } else {
+            for (int i = 0;i<17675;i++){
+                int per = keyConvert(i);
+                if (per > this->highKeyPercent){
+                    this->highKeyID = i;
+                    this->highKeyPercent = per;
+                    cout << "New Best Key Found: " << K2BConv.get(i,false);
+                }
+            }
+            if (this->highKeyPercent==0){
+                cout << "No subitble key was found\n";
+            } else {
+                cout << "Key found: " << K2BConv.get(this->highKeyID,false)<< "\n";
+            }
+        }
+    }
+    
     void setFile(string Filepath){
         this->Filepath = Filepath;
         this->F2BConv.setup(Filepath);
         this->binString = F2BConv.convertFull();
+        this->setup = true;
     }
 
-    string keyConvert(int keyID){
+    int keyConvert(int keyID){
         if (keyID < 0 || keyID > 17575){
             cout << "keyIndex out of range\nKey IDs range from 0 to 17575\n";
-            return "void";
+            return -1;
         }
         string xored;
         string asciid;
@@ -43,10 +67,11 @@ class Driver{
         cout << "Key: " << K2BConv.get(keyID,false) << "\n";
         xored = Decrypt.decrypt(this->binString,key);
         asciid = binToInt(xored);
-        cout << "Ascii Codes: " << asciid << "\n";
+        //cout << "Ascii Codes: " << asciid << "\n";
         decrypted = B2AConv.setup(xored);
-        cout << "Decrypted: " << decrypted << "\n";
-        return asciid;
+        //cout << "Decrypted: " << decrypted << "\n";
+        int correctPer = wordCompare(decrypted);
+        return correctPer;
     }
 
     string binToInt(string xor){
@@ -67,5 +92,5 @@ class Driver{
 int main(){
     Driver d;
     d.setFile("testFile.txt");
-    for(int i=0;i<17576;i++){d.keyConvert(i);}
+    d.run();
 }

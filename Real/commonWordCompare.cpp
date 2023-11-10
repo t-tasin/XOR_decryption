@@ -29,7 +29,7 @@ int wordCompare (string decryptedMessage){
             newWord = newWord + decryptedMessage[i];
         } else {
             messageArray[count] = newWord;
-            cout << newWord << endl;
+            //cout << newWord << endl;
             count++;
             newWord = "";
 
@@ -76,8 +76,9 @@ int wordCompare (string decryptedMessage){
     int percentOfCommonWords = (commonWordsFound*100)/count;
     return percentOfCommonWords;
 }
-
+/*
 int main(){
-    int c = wordCompare("104,101,108,108,111");
+    int c = wordCompare("hello");
     cout << c << "\n";
 }
+*/

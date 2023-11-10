@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <bitset>
+
 using namespace std;
 
 class B2AConverter {
@@ -17,7 +18,7 @@ class B2AConverter {
                 hold += bitstring[i];
                 //cout << "standard: " << bitstring[i] << "\n";
             } else {
-                two += convert(hold) + ",";
+                two += convert(hold);
                 //cout << "Converting: " << hold <<"\n";
                 hold = "";
                 //cout << "total output so far: " << two << "\n";

@@ -47,6 +47,7 @@ class F2BConverter {
   string strToBin(string toConvert){
     string bitString;
     string sumChars;
+    int numChars;
     for (int i = 0; i < toConvert.length(); i++) { 
       if (toConvert[i]==','){ // keeps the commas not converted to binary
         int num = stoi(sumChars);
@@ -56,6 +57,7 @@ class F2BConverter {
         }
         sumChars = "";
         bitString += bitset<8>(num).to_string() + ",";
+        numChars += 1;
       } else {
         sumChars += toConvert[i];
       }
@@ -67,6 +69,11 @@ class F2BConverter {
       }
     sumChars = "";
     bitString += bitset<8>(num).to_string();
+    numChars += 1;
+    cout << "file contains " << numChars << " numbers\n";
+    if (numChars<50){
+      this->lessThan50 = true;
+    } else {this->lessThan50 = false;}
     return bitString;
   }
 
@@ -101,10 +108,6 @@ class F2BConverter {
     }
     this->is09 = true;
     file.close();
-    cout << "file contains " << numCount << " numbers\n";
-    if (numCount<50){
-      this->lessThan50 = true;
-    } else {this->lessThan50 = false;}
     return fileString;
   }
   bool beget(){
