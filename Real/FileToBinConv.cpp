@@ -47,7 +47,7 @@ class F2BConverter {
   string strToBin(string toConvert){
     string bitString;
     string sumChars;
-    int numChars;
+    int numChars = 0;
     for (int i = 0; i < toConvert.length(); i++) { 
       if (toConvert[i]==','){ // keeps the commas not converted to binary
         int num = stoi(sumChars);

@@ -3,82 +3,69 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+#include <vector>
 
 using namespace std;
 
-
 //Will compare the decrypted message to a file of common words and
 //return an int value of the percentage.
+class Comparer {
+    public:
+    vector<string> commonWords;
 
-int wordCompare (string decryptedMessage){
-
-    int messageLength = decryptedMessage.length();
-    int spaceNum = 0;
-    for (int i = 0; i < messageLength; i++){
-        if (decryptedMessage[i] == ' '){
-            spaceNum++;
-        }
-    }
-    //string messageArray[spaceNum+1];
-    string * messageArray = new string[spaceNum+1];
-    string newWord = "";
-    int count = 0;
-    for (int i = 0; i <= messageLength; i++){
-        if ((decryptedMessage[i] != ' ' ) && (decryptedMessage[i] != '\0') ){
-            newWord = newWord + decryptedMessage[i];
-        } else {
-            messageArray[count] = newWord;
-            //cout << newWord << endl;
-            count++;
-            newWord = "";
-
-        }
+    Comparer::Comparer(){
+        generateWordsArray();
     }
 
-
-
-    //counts total number of words in decrypted message
-    //int numOfWords = 0; // Use count Variable
-    //counts total number of words that are in the decrypted message that match a word in the common words file
-    int commonWordsFound = 0;
-
-    ifstream file;
-    string fileContents;
-
-    file.open("./commonWords.txt");
-    file >> fileContents;
-
-    if (file.is_open()){
-        string commonWordArray[5000];
-        for (int j = 0; j < count; j++) {
-            for (int i = 0; i < 5000; i++)
-            {
-                getline(file, commonWordArray[i], '\n');
-                if (commonWordArray[i] == messageArray[j]) {
-                    commonWordsFound++;
+    int wordCompare (string decryptedMessage, bool loud = false){
+        if (loud){
+            cout << "Message: " << decryptedMessage << endl;
+        }
+        int foundWords = 0;
+        int messageLength = decryptedMessage.length();
+        string newWord = "";
+        int count = 0;
+        for (int i = 0; i <= messageLength; i++){
+            if (decryptedMessage[i] != ' '){
+                newWord = newWord + decryptedMessage[i];
+            } else {
+                count++;
+                for (int x = 0; x<this->commonWords.size(); x++){
+                    if (newWord == this->commonWords[x]){
+                        foundWords += 1;
+                        break;
+                    }
                 }
+                newWord = "";
             }
         }
-
-//        for (int i = 0; i < count; i++){
-//            for ( int j = 0; j < 5000; j++)
-//                if ( commonWordArray [i] != messageArray[j]){
-//                    commonWordsFound++;
-//                }
-//        }
-
-    } else {
-        cout << "The file didn't open correctly" << endl;
+        newWord = newWord.substr(0, newWord.length()-1); // removes the hidden ending char that c++ sticks on because it hates me personally =)
+        count++; // call the check for the last characters as they dont have a space at the end
+        for (int x = 0; x<this->commonWords.size(); x++){
+            if (newWord == this->commonWords[x]){
+                foundWords += 1;
+                break;
+            }
+        }
+        //counts total number of words in decrypted message
+        //int numOfWords = 0; // Use count Variable
+        //counts total number of words that are in the decrypted message that match a word in the common words file
+        //calculates the percent value of the amount of common words in the decrypted message
+        return (foundWords * 100)/count;
     }
+    void generateWordsArray(){
+        ifstream file;
+        string fileContents;
 
-    //calculates the percent value of the amount of common words in the decrypted message
-    int percentOfCommonWords = (commonWordsFound*100)/count;
-    return percentOfCommonWords;
-}
-/*
-int main(){
-    int c = wordCompare("hello");
-    cout << c << "\n";
-}
-*/
+        file.open("./commonWords.txt");
+        if (file.is_open()){
+            for (int x=0;x<5000;x++){
+                file >> fileContents;
+                this->commonWords.insert(commonWords.begin(),fileContents);
+            }
+            file.close();
+        } else {
+            cout << "The file didn't open correctly" << endl;
+        }
+    }
+};

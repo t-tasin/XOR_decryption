@@ -34,8 +34,10 @@ class B2AConverter {
         while(sstream.good()){
             bitset<8> bits;
             sstream >> bits;
-            char c = char(bits.to_ulong());
-            output += c;
+            if (bits.to_string() != "00000000"){ // for some reason this gives a set of bits with the character, and also 8 0s. c++ is a language for the criminally insane
+                char c = char(bits.to_ullong());
+                output += c;
+            }
         }
     return output;
     }
