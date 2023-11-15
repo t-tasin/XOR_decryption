@@ -73,7 +73,7 @@ class Driver{
         int correctPer = Comp.wordCompare(decrypted,loud);
         return correctPer;
     }
-
+/*
     string binToInt(string xor){
         string set;
         string nums;
@@ -85,8 +85,8 @@ class Driver{
         }
         nums += to_string(stoi(set, nullptr, 2));
         set = "";
-        return nums;
-    }
+        return nums
+    } */
 };
 
 int main(){

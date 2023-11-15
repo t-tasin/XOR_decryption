@@ -13,7 +13,7 @@ class Comparer {
     public:
     vector<string> commonWords;
 
-    Comparer::Comparer(){
+    Comparer(){
         generateWordsArray();
     }
 

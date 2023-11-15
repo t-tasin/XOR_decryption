@@ -10,7 +10,7 @@ class K2BConverter{
     string keysList[17576];
     string binKeysList[17576];
 
-    K2BConverter::K2BConverter(){
+    K2BConverter(){
         combinations();
         //cout<<"Finished Creation\n";
         convert();
