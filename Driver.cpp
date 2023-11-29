@@ -24,6 +24,7 @@ class Driver{
     B2AConverter B2AConv;
     Decrypter Decrypt;
     Comparer Comp;
+    string found;
 
     int highKeyID = 0;
     int highKeyPercent = 0;
@@ -39,6 +40,7 @@ class Driver{
                     this->highKeyID = i;
                     this->highKeyPercent = per;
                     cout << "New Best Key Found: " << K2BConv.get(i,false) << endl;
+                    
                 }
             }
             if (this->highKeyPercent==0){
@@ -66,6 +68,9 @@ class Driver{
         string asciid;
         string decrypted;
         string key = K2BConv.get(keyID);
+        if (loud){
+            cout << "Key: " << K2BConv.get(keyID,false) << endl;
+        }
         //cout << "Key: " << K2BConv.get(keyID,false) << "\n";
         xored = Decrypt.decrypt(this->binString,key);
         decrypted = B2AConv.setup(xored);
@@ -91,6 +96,9 @@ class Driver{
 
 int main(){
     Driver d;
-    d.setFile("testFile.txt");
-    d.run(false);
+    string filename;
+    cout << "Enter relative or absolute filepath: ";
+    cin >> filename;
+    d.setFile(filename);
+    d.run(true);
 }
