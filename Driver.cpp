@@ -3,12 +3,12 @@
 #include <bitset>
 #include <string>
 
-#include ".\BinToASCIIConv.cpp" //
-#include ".\FileToBinConv.cpp" //
-#include ".\KeyToBinConv.cpp" //
+#include "BinToASCIIConv.cpp" //
+#include "FileToBinConv.cpp" //
+#include "KeyToBinConv.cpp" //
 
-#include ".\Decrypter.cpp" //
-#include ".\commonWordCompare.cpp" //
+#include "Decrypter.cpp" //
+#include "commonWordCompare.cpp" //
 
 using namespace std;
 
@@ -73,7 +73,7 @@ class Driver{
         int correctPer = Comp.wordCompare(decrypted,loud);
         return correctPer;
     }
-
+/*
     string binToInt(string xor){
         string set;
         string nums;
@@ -85,12 +85,12 @@ class Driver{
         }
         nums += to_string(stoi(set, nullptr, 2));
         set = "";
-        return nums;
-    }
+        return nums
+    } */
 };
 
 int main(){
     Driver d;
     d.setFile("testFile.txt");
-    d.run(true);
+    d.run(false);
 }

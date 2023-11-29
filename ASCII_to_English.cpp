@@ -2,6 +2,7 @@
 //10/27/23
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
