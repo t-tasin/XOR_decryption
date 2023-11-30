@@ -100,5 +100,9 @@ int main(){
     cout << "Enter relative or absolute filepath: ";
     cin >> filename;
     d.setFile(filename);
-    d.run(true);
+    d.run(false);
+    cout << "Enter to close";
+    string hold;
+    cin >> hold;
+    return 0;
 }
